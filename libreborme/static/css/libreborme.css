@@ -16,9 +16,6 @@ footer img[src*="agpl"] {
 .footer {
   padding-top: 20px;
   padding-bottom: 10px;
-  margin-top: 40px;
-  border-top: 1px solid #eee;
-  z-index: 2;
 }
 
 .header1 {
@@ -97,21 +94,51 @@ footer img[src*="agpl"] {
   margin-bottom: 20px;
 }
 
-ul:not(.pagination) {
+aside.sponsors {
+  background: #FAFAFA;
+}
+
+aside.sponsors .container {
+  padding: 40px;
+  text-align: center;
+}
+
+aside.sponsors p {
+  margin-bottom: 20px;
+}
+aside.sponsors ul {
+  display: inline-block;
+  margin: auto;
+  overflow: auto;
+}
+aside.sponsors li {
+  float: left;
+  list-style: none;
+}
+aside.sponsors li a {
+  display: block;
+  padding: 25px 40px;
+  transition: filter .5s ease;
+}
+aside.sponsors li a:not(:hover) {
+  filter: grayscale(100);
+}
+
+.main ul:not(.pagination) {
   list-style-type: none;
   padding: 0;
 }
 
-ul:not(.pagination) li {
-    border-bottom: 1px solid #DDD;
-    padding: 10px;
+.main ul:not(.pagination) li {
+  border-bottom: 1px solid #DDD;
+  padding: 10px;
 }
 
-ul li:last-of-type{
+.main ul li:last-of-type{
   border: none;
 }
 
-ul li:hover {
+.main ul li:hover {
   background-color: #EEE;
 }
 
