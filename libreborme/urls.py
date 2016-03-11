@@ -5,8 +5,8 @@ from .views import IndexView, CookiesView
 from .settings import DEBUG
 
 urlpatterns = patterns('',
-    url(r'^$', IndexView.as_view(), name='home'),
-    url(r'^borme/', include('borme.urls')),
+    url(r'^borme/$', IndexView.as_view(), name='home'),
+    url(r'^', include('borme.urls')),
 
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     url(r'^humans\.txt$', TemplateView.as_view(template_name='humans.txt', content_type='text/plain')),

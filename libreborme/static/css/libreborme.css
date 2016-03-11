@@ -1,12 +1,11 @@
 body {
   padding-top: 0px;
-  padding-bottom: 100px;
+  font-family: Lato;
 }
 
 footer {
-  position: fixed;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, .9);
+  background-color: #1A1A1A;
+  color: white;
 }
 
 footer img[src*="agpl"] {
@@ -22,34 +21,80 @@ footer img[src*="agpl"] {
   z-index: 2;
 }
 
-.container {
-
-}
-
 .header1 {
-  background-color: #EEE;	
+  background-color: #A01626;
+  height: 300px;
+  background-image: url('/static/bg-triangles-gray.png');
+  background-size: cover;
 }
 
-.header1 a {
+.header1 form {
+  display: block;
+  position: relative;
+  max-width: 650px;
+  margin: 30px auto;
 }
 
-.header1 a img{
-  width: 180px;
-  margin: 5px 10px 3px 20px;
+.header1 h1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.header1 h1 img {
+  width: 115px;
+  height: 78px;
+}
+
+.header1 h2 {
+  position: absolute;
+  left: 170px;
+  top: 35px;
+  color: white;
+  font-size: 1.5em;
+  width: 400px;
 }
 
 .header1 input[name="q"] {
-  padding-right: 50px;
-  margin-right: -44px;
+  position: absolute;
+  left: 0;
+  top: 130px;
+  padding: 10px 100px 10px 20px;
+  font-size: 1.3em;
+  height: 60px;
+  width: 100%;
 }
 
 .header1 button[type="submit"] {
+  position: absolute;
+  top: 130px;
+  right: 0;
+  width: 80px;
+  height: 60px;
   border: none;
-  margin-right: 20px;
-  background-color: #EEE;
+  background-color: #590D16;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-left: 1px solid #DDD;
+  color: white;
+}
+
+.header1 .advanced {
+  position: absolute;
+  right: 10px;
+  top: 200px;
+  color: white;
+}
+
+.container {
+  position: relative;
+}
+
+.container.main {
+  padding: 50px 0;
+}
+
+.main h2 {
+  margin-bottom: 20px;
 }
 
 ul:not(.pagination) {
@@ -67,7 +112,7 @@ ul li:last-of-type{
 }
 
 ul li:hover {
-  background-color: #EEE; 
+  background-color: #EEE;
 }
 
 h2 i.glyphicon {
@@ -126,7 +171,7 @@ td.nobormeday:hover {
 }
 
 table.calendar > tbody > tr > th {
-	padding: 4px;
+  padding: 4px;
 }
 
 .calendar caption {
@@ -170,8 +215,7 @@ table.year {
 }
 
 #headerCookies {
-    background-color: #5A5A5A;
-    border-bottom: 1px solid #CCC;
+    background-color: #222;
     box-shadow: 0 0 2px #CCC;
     color: white;
 }
