@@ -60,10 +60,10 @@
 </script>
 {% endif %}
 
-<div class="header1">
+<header>
   <div class="container">
     <form role="search" action="{% url "borme-search" %}" method="get">
-    <h1><a href="{% url "borme-home" %}"><img alt="libreborme logo" src="{% static "logo_white.png" %}"></a></h1>
+    <h1><a href="{% url "home" %}"><img alt="libreborme logo" src="{% static "logo_white.png" %}"></a></h1>
     <h2>Plataforma de búsqueda en el <br/>Boletín Oficial del Registro Mercantil</h2>
     <div class="form-group">
       <input type="text" name="q" placeholder="Buscar por nombre de empresa o persona" {% if not search_view %}autofocus {% endif %}>
@@ -74,7 +74,7 @@
     </div>
     </form>
   </div>
-</div>
+</header>
 
 <div class="main container">
 
@@ -137,10 +137,17 @@
                   | <i class="fa fa-github"></i> <a href="https://github.com/PabloCastellano/libreborme/" target="_blank" rel="nofollow">Código fuente</a> <i>(<a href="https://github.com/PabloCastellano/libreborme/commit/{{ version }}" target="_blank" rel="nofollow">git-{{ version }}</a>)</i></small>
                 </p>
               </div>
-              <div class="col-lg-4">
-                <img alt="agplv3 logo" src="{% static "agplv3-155x51.png" %}">
-                <img alt="opendata ogo" src="{% static "od_80x15_blue.png" %}">
-              </div>
+              <ul class="col-lg-2">
+                <li><a href="{% url 'contact' %}">Contacto</a></li>
+                <li><a href="{% url 'about' %}">Aviso legal</a></li>
+                <li><a href="{% url 'cookies' %}">Política de cookies</a></li>
+              </ul>
+              <ul class="col-lg-2">
+                <li><a href="https://github.com/PabloCastellano/libreborme/">Código fuente</a></li>
+                <li><a href="{% url 'supporters' %}">Patrocinadores</a></li>
+                <li><a href="{% url 'about' %}">Estadísticas</a></li>
+                <li><a href="{% url 'about' %}">Dona</a></li>
+              </ul>
             </div>
       </div>
     </footer>

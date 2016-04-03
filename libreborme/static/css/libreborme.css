@@ -4,7 +4,15 @@ body {
 }
 
 footer {
-  background-color: #1A1A1A;
+  background-color: #232B32;
+  color: white;
+  padding: 50px 20px 30px 20px;
+}
+
+footer a {
+  color: #CB6772;
+}
+footer a:hover {
   color: white;
 }
 
@@ -13,46 +21,51 @@ footer img[src*="agpl"] {
   margin-right: 20px;
 }
 
-.footer {
-  padding-top: 20px;
-  padding-bottom: 10px;
+footer ul {
+  list-style: none;
 }
 
-.header1 {
+body > header {
   background-color: #A01626;
   height: 300px;
   background-image: url('/static/bg-triangles-gray.png');
   background-size: cover;
 }
+body > header.big {
+  height: 600px;
+  margin-bottom: -100px;
+}
 
-.header1 form {
+body > header form {
   display: block;
   position: relative;
   max-width: 650px;
   margin: 30px auto;
 }
 
-.header1 h1 {
+body > header h1 {
   position: absolute;
   left: 0;
   top: 0;
 }
 
-.header1 h1 img {
+body > header h1 img {
   width: 115px;
   height: 78px;
 }
 
-.header1 h2 {
+body > header h2 {
   position: absolute;
   left: 170px;
   top: 35px;
   color: white;
   font-size: 1.5em;
   width: 400px;
+  max-width: 50vw;
+  text-align: left;
 }
 
-.header1 input[name="q"] {
+body > header input[name="q"] {
   position: absolute;
   left: 0;
   top: 130px;
@@ -62,28 +75,42 @@ footer img[src*="agpl"] {
   width: 100%;
 }
 
-.header1 button[type="submit"] {
+body > header button[type="submit"] {
   position: absolute;
-  top: 130px;
+  top: 131px;
   right: 0;
   width: 80px;
-  height: 60px;
+  height: 58px;
   border: none;
-  background-color: #590D16;
+  background: #590D16;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   color: white;
 }
+body > header button[type="submit"]:hover {
+  background: #691D26;
+  color: white;
+}
 
-.header1 .advanced {
+body > header .advanced {
   position: absolute;
   right: 10px;
   top: 200px;
   color: white;
 }
 
+body > header aside {
+  position: relative;
+  top: 270px;
+  background: rgba(255, 255, 255, .8)!important;
+}
+body > header aside .container {
+  width: auto!important;
+}
+
 .container {
   position: relative;
+  text-align: justify;
 }
 
 .container.main {
@@ -237,8 +264,8 @@ table.year {
 }
 
 .limiter {
-    margin: 0 auto;
-    width: 993px;
+  margin: 0 auto;
+  width: 993px;
 }
 
 .header-buttonline {
@@ -254,9 +281,11 @@ table.year {
 }
 
 #headerCookies {
-    background-color: #222;
-    box-shadow: 0 0 2px #CCC;
-    color: white;
+  display: block;
+  max-width: 100vw;
+  background-color: #222;
+  box-shadow: 0 0 2px #CCC;
+  color: white;
 }
 
 #headerCookies a {
@@ -272,4 +301,56 @@ table.year {
 #headerCookies p {
     margin: 2px;
     padding: 0
+}
+
+.main h1 {
+  margin: 30px 0 30px 10px;
+}
+
+.modal-header {
+  padding: 18px 25px 18px 40px;
+}
+.modal-header .close {
+  margin-top: 1px!important;
+}
+.modal-body {
+  padding: 20px 40px;
+  text-align: justify;
+}
+
+@media only screen
+  and (max-device-width: 992px) {
+
+  body > header h2 {
+    top: 48px;
+    left: 140px;
+    font-size: 1em;
+  }
+
+  .main h1 {
+    margin-left: 30px;
+  }
+  .main .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  footer > .container > .row > * {
+    margin-bottom: 20px;
+  }
+
+  footer li {
+    text-align: center;
+  }
+  footer li a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+  }
+
+  .limiter {
+    width: auto;
+    padding: 10px 15px;
+  }
 }

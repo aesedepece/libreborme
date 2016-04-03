@@ -1,32 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="libreborme, borme, registro mercantil, opendata">
-    <meta name="author" content="Pablo Castellano">
-    {% load staticfiles %}
-    <link rel="icon" href="{% static "favicon.ico" %}">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% block meta %}
+      <meta name="keywords" content="Empresas, Informe, CNAE, Registro, Mercantil, Actos, BOE, BORME, Open Data, Cargos, Directivos"/>
+      <meta name="description" content="Libreborme.net ofrece un buscador para el Boletín Oficial del Registro Mercantil. Encuentra información sobre actos mercantiles de empresas."/>
+  {% endblock %}
+  <meta name="author" content="Pablo Castellano">
+  {% load staticfiles %}
+  <link rel="icon" href="{% static "favicon.ico" %}">
+  <link type="text/plain" rel="author" href="humans.txt" />
 
-    <title>{% block title %}LibreBORME{% endblock %}</title>
+  <title>{% block title %}LibreBORME{% endblock %}</title>
 
-    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "fontawesome/css/font-awesome.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/libreborme.css" %}" rel="stylesheet">
-    {% block javascript %}{% endblock %}
-  </head>
-  <body>
+  <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "fontawesome/css/font-awesome.min.css" %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,300,700|Roboto+Slab:300,400">
+  <link href="{% static "css/libreborme.css" %}" rel="stylesheet">
 
-    <a href="https://github.com/PabloCastellano/libreborme">
-        <img style="position: absolute; top: 0; right: 0; border: 0;" src="{% static "forkme_right_red_aa0000.png" %}" alt="Fork me on GitHub"
-        data-canonical-src="{% static "forkme_right_red_aa0000.png" %}">
-    </a>
+  {% block javascript %}{% endblock %}
+  <script src="{% static 'static_jquery/js/jquery.min.js' %}"></script>
+  <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+  <script src="{% static "jquery.cookie.js" %}"></script>
+
+</head>
+
+<body>
+
+{% if not debug %}
+<!-- Cookies message -->
+<div id="headerCookies" style="display:none;">
+	<div class="limiter">
+		<p class="header-message">LibreBORME.net utiliza cookies para que tengas la mejor experiencia de navegación. Si sigues navegando entendemos que aceptas nuestra <a href="{% url 'cookies' %}">política de cookies</a>.</p>
+		<p class="header-buttonline">
+			<button type="button" class="btn btn-primary btn-sm cookies-header-close">OK</button>
+		</p>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var advice = $("#headerCookies");
+	var closeButton = advice.find(".cookies-header-close");
+	var cookie = $.cookie('cookies');
+
+	if (cookie == null) {
+	    advice.show();
+	    closeButton.click(function(e){
+		var date = new Date();
+	        date.setTime(date.getTime() + (60 * 60 * 24 * 365 * 10 * 1000));
+	        $.cookie("cookies", "valcookiemsg", { expires: date, path: "/", domain: ".libreborme.net" });
+		e.preventDefault();
+		e.stopPropagation();
+		advice.slideUp("fast");
+	    });
+	}
+</script>
+{% endif %}
+
+<header class="big">
+  <div class="container">
+    <form role="search" action="{% url "borme-search" %}" method="get">
+    <h1><a href="{% url "home" %}"><img alt="libreborme logo" src="{% static "logo_white.png" %}"></a></h1>
+    <h2>Plataforma de búsqueda en el <br/>Boletín Oficial del Registro Mercantil</h2>
+    <div class="form-group">
+      <input type="text" name="q" placeholder="Buscar por nombre de empresa o persona" {% if not search_view %}autofocus {% endif %}>
+      <input type="hidden" name="page" value="1">
+      <input type="hidden" name="type" value="all">
+      <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+      <a class="advanced" href="{% url "borme-search" %}">Búsqueda avanzada</a>
+    </div>
+    </form>
+    <aside class="sponsors">
+      <div class="container">
+        <p class="madepossible">LibreBORME es posible gracias al apoyo de</p>
+        <ul>
+          <li><a href="//civio.es" ><img src="/static/civio.png" /></a></li>
+          <li><a href="//civio.es" ><img src="/static/civio.png" /></a></li>
+          <li><a href="//civio.es" ><img src="/static/civio.png" /></a></li>
+          <li><a href="//civio.es" ><img src="/static/civio.png" /></a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<div class="main container">
+
     {% block content %}{% endblock %}
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{% static "ie10-viewport-bug-workaround.js" %}"></script>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">¿Por qué no hay datos anteriores al año 2009?</h4>
+          </div>
+          <div class="modal-body">
+              <p>La ley <i>de acceso electrónico de los ciudadanos a los Servicios Públicos</i></a>, aprobada en España en
+                  el año 2007, incluyó entre sus reformas la obligación de publicar en formato electrónico varios Boletines
+                  Oficiales como el BOE y el BORME.</p>
+
+              <p>Dicha ley especificó que la fecha a partir de la cual se publicarían los Boletines en formato electrónico sería a partir de 2009,
+                  por lo que todos los Boletines Oficiales anteriores sólo están disponibles en papel en la sede de la <i>Agencia Estatal Boletín Oficial del Estado</i>.</p>
+
+              <p>Por este motivo en LibreBORME la información no es completa: aparecen empresas de las que desconocemos sus cargos directivos,
+                  sabemos la fecha de disolución de sociedades pero no sabemos la de su constitución y no hay rastro de empresas que no hayan
+                  inscrito ningún acto mercantil desde 2009 hasta ahora.</p>
+
+              <p>El proyecto LibreBORME nace para recordar que los datos recogidos en el Registro Mercantil han sido tratados y gestionados por
+                  funcionarios públicos, pagados a su vez con los impuestos de los ciudadanos y reivindicar que son datos que nos
+                  pertenecen y que en pleno siglo XXI deben estar accesibles a través de Internet.</p>
+
+              <p><a href="http://boe.es/diario_boe/txt.php?id=BOE-A-2007-12352" target="_blank" rel="nofollow"><small>Ley 11/2007, de 22 de junio, de acceso electrónico de los ciudadanos a los Servicios Públicos</small></a>
+              <br/><a href="http://www.rmc.es/" target="_blank" rel="nofollow"><small>Registro Mercantil Central</small></a></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Entendido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- /container -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <p class="disclaimer">Esta web muestra únicamente datos públicos disponibles desde el año 2009. <a href="#" data-toggle="modal" data-target="#myModal"><small>¿Por qué?</small></a></p>
+                <p class="copyright"><small>© LibreBORME 2014-2016
+                  | <i class="fa fa-envelope"></i> <span style="unicode-bidi:bidi-override; direction: rtl;">ten.emroberbil@otcatnoc</span>
+                  | <i class="fa fa-twitter"></i> <a href="https://twitter.com/libreborme" target="_blank" rel="nofollow">@LibreBORME</a>
+                  | <i class="fa fa-github"></i> <a href="https://github.com/PabloCastellano/libreborme/" target="_blank" rel="nofollow">Código fuente</a> <i>(<a href="https://github.com/PabloCastellano/libreborme/commit/{{ version }}" target="_blank" rel="nofollow">git-{{ version }}</a>)</i></small>
+                </p>
+              </div>
+              <ul class="col-lg-2">
+                <li><a href="{% url 'contact' %}">Contacto</a></li>
+                <li><a href="{% url 'about' %}">Aviso legal</a></li>
+                <li><a href="{% url 'cookies' %}">Política de cookies</a></li>
+              </ul>
+              <ul class="col-lg-2">
+                <li><a href="https://github.com/PabloCastellano/libreborme/">Código fuente</a></li>
+                <li><a href="{% url 'supporters' %}">Patrocinadores</a></li>
+                <li><a href="{% url 'about' %}">Estadísticas</a></li>
+                <li><a href="{% url 'about' %}">Dona</a></li>
+              </ul>
+            </div>
+      </div>
+    </footer>
+
 
   {% include "piwik.html" %}
   </body>
