@@ -32,8 +32,6 @@ body > header {
   background-size: cover;
 }
 body > header.big {
-  height: 600px;
-  margin-bottom: -100px;
 }
 
 body > header form {
@@ -99,15 +97,6 @@ body > header .advanced {
   color: white;
 }
 
-body > header aside {
-  position: relative;
-  top: 270px;
-  background: rgba(255, 255, 255, .8)!important;
-}
-body > header aside .container {
-  width: auto!important;
-}
-
 .container {
   position: relative;
   text-align: justify;
@@ -124,6 +113,9 @@ body > header aside .container {
 
 aside.sponsors {
   background: #FAFAFA;
+  margin-bottom: -100px;
+  height: calc(100vh - 504px);
+  min-height: 300px;
 }
 
 aside.sponsors .container {
